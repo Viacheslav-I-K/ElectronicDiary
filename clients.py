@@ -1,33 +1,46 @@
 '''
 Создать информационную систему позволяющую работать с сотрудниками некой компании \ студентами вуза \ учениками школы.
 '''
+from functions import get_homeworks, get_teacher_by_id, table
 
 class Student:
-    commannds = ["view_homework"]
+    commannds = {
+            0: "Посмотреть Д/З",
+            1: "Сдать Д/З"
+        }
 
     def __init__(self, id, student):
         self.id = id
         self.student = student
     
-    def view_homework(self):
-        if self.is_login:
-            return "data"
-
-    def view(self):
-        if self.is_login:
-            pass
-    
     def print_data(self, data):
         print(data)
 
+    def view_homework(self):
+        homeworks = get_homeworks(self.student[self.id]['group'])
+        headers = {"id": "ID", "from": "Учитель", "subject": "Предмет", "homework": "Задание", "deadline": "Срок выполнения", "student_completed": "Статус"}
+        temp = []
+        for item in homeworks:
+            for key, value in item.items():
+                teacher = get_teacher_by_id(value["from"])
+                temp.append({
+                    "id": key,
+                    "from": teacher["name"],
+                    "subject": teacher["subject"],
+                    "homework": value["homework"],
+                    "deadline": value["deadline"],
+                    "student_completed": "Сдано" if self.id in value["students_completed"] else "Не сдано"
+                })
+        print(table(headers, temp))
 
     def print_commands(self):
-        print(f"Доступные коменды{self.commannds}")
+        for key, command in self.commannds.items():
+            print(f"{command} - {key}")
 
     def do_command(self, command):
-        if command in self.commannds:
-            if command == "view_homework":
-                self.print_data(f"Ваша домашняя работа {self.student[self.id]['homework']}")
+        if command in [str(item) for item in self.commannds.keys()]:
+            if command == "0":
+                self.view_homework()
         else:
             print("Invalid command")
 
@@ -36,5 +49,3 @@ class Teacher(Student):
 
 class Admin(Teacher):
     pass
-
-a = Student("max", 1234)

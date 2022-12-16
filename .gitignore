@@ -1,2 +1,5 @@
 venv/
 .DS_Store
+tests/
+doc.txt
+todo.txt

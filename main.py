@@ -1,9 +1,11 @@
 import json
+import os
 
 from clients import Student
 
+
 def login(name, password):
-    with open("diary/students.json", "r", encoding="utf-8") as f:
+    with open("data/students.json", "r", encoding="utf-8") as f:
         students = json.load(f)
         for key, value in students.items():
             if value["name"] == name and value["password"] == password:
@@ -11,18 +13,20 @@ def login(name, password):
                 return Student(key, data)
     return False
 
-name = input() #"сергей"
-password = input()# "1234"
+name = "сергей"
+password = "1234"
 
 user = login(name, password)
 
 
 
 while user:
+    os.system('clear')
     user.print_commands()
     command = input("Введите команду: ")
-    if command == "exit":
-        break
     user.do_command(command)
+    is_continue = input("Продлжить - press Enter,  Завершить работу - exit: ")
+    if is_continue == "exit":
+        break
 else:
     print("Login failed")
