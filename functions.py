@@ -2,22 +2,22 @@ import json
 
 
 def get_students_from_json():
-    with open("data/students.json", "r", encoding="utf-8") as f:
+    with open("ElectronicDiary/data/students.json", "r", encoding="utf-8") as f:
         students = json.load(f)
     return students
 
 def get_teachers_from_json():
-    with open("data/teachers.json", "r", encoding="utf-8") as f:
+    with open("ElectronicDiary/data/teachers.json", "r", encoding="utf-8") as f:
         teachers = json.load(f)
     return teachers
 
 def get_groups_from_json():
-    with open("data/groups.json", "r", encoding="utf-8") as f:
+    with open("ElectronicDiary/data/groups.json", "r", encoding="utf-8") as f:
         groups = json.load(f)
     return groups
 
 def get_homeworks_from_json():
-    with open("data/homeworks.json", "r", encoding="utf-8") as f:
+    with open("ElectronicDiary/data/homeworks.json", "r", encoding="utf-8") as f:
         homeworks = json.load(f)
     return homeworks
 
@@ -60,6 +60,11 @@ def table(headers, data):
     for key, value in headers.items():
         res += f"{'-' * lens[key]}+"
     return res
+
+def write_homeworks_to_json(homeworks):
+    with open("ElectronicDiary/data/homeworks.json", "w", encoding="utf-8") as f:
+        json.dump(homeworks, f, indent=4, ensure_ascii=False)
+
 
 
 if __name__ == "__main__":

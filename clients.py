@@ -1,7 +1,7 @@
 '''
 Создать информационную систему позволяющую работать с сотрудниками некой компании \ студентами вуза \ учениками школы.
 '''
-from functions import get_homeworks, get_teacher_by_id, table
+from functions import get_homeworks, get_teacher_by_id, table, get_homeworks_from_json, write_homeworks_to_json
 
 class Student:
     commannds = {
@@ -33,6 +33,19 @@ class Student:
                 })
         print(table(headers, temp))
 
+    def make_homework(self, homework_id):
+        temp_hw = get_homeworks_from_json()
+        if temp_hw.get(homework_id) is None:
+            print('Такой работы нет')
+        elif self.id not in temp_hw[homework_id]["students_completed"] and temp_hw[homework_id]["to_group"] == self.student[self.id]["group"] :
+            temp_hw[homework_id]["students_completed"].append(self.id)
+        else:
+            print('Ошибка при сдаче ДЗ')
+        
+        write_homeworks_to_json(temp_hw)
+
+
+    
     def print_commands(self):
         for key, command in self.commannds.items():
             print(f"{command} - {key}")
@@ -41,6 +54,8 @@ class Student:
         if command in [str(item) for item in self.commannds.keys()]:
             if command == "0":
                 self.view_homework()
+            elif command == "1":
+                self.make_homework(input("Введите id работы: "))
         else:
             print("Invalid command")
 
