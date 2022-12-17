@@ -1,0 +1,18 @@
+{
+    "1": {
+        "from": "1",
+        "to_group": "0",
+        "homework": "№2 по тригонометрии",
+        "deadline": "14.06.2022",
+        "students_completed": [
+            "0"
+        ]
+    },
+    "2": {
+        "from": "0",
+        "to_group": "1",
+        "homework": "сдать доклад",
+        "deadline": "14.06.2022",
+        "students_completed": []
+    }
+}
