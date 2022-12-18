@@ -21,6 +21,10 @@ def get_homeworks_from_json():
         homeworks = json.load(f)
     return homeworks
 
+def write_homeworks_to_json(homeworks):
+    with open("data/homeworks.json", "w", encoding="utf-8") as f:
+        json.dump(homeworks, f, indent=4, ensure_ascii=False) 
+
 def get_teacher_by_id(id):
     teachers = get_teachers_from_json()
     return teachers.get(id)
@@ -63,8 +67,8 @@ def table(headers, data):
 
 
 if __name__ == "__main__":
-    print(get_homework("2"))
     print(get_teacher_by_id("0"))
+    write_homeworks_to_json(get_homeworks_from_json())
 
 '''
 def homeworks_from_json(action="read", data={}):

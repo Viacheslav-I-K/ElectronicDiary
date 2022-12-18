@@ -32,6 +32,12 @@ class Student:
                     "student_completed": "Сдано" if self.id in value["students_completed"] else "Не сдано"
                 })
         print(table(headers, temp))
+    
+    def make_homework(self, homework_id):
+        '''
+        self.id - id студента
+        '''
+        pass
 
     def print_commands(self):
         for key, command in self.commannds.items():
@@ -41,11 +47,18 @@ class Student:
         if command in [str(item) for item in self.commannds.keys()]:
             if command == "0":
                 self.view_homework()
+            elif command == "1":
+                print("go;jhb")
         else:
             print("Invalid command")
 
 class Teacher(Student):
-    pass
+    def view_homeworks(self, group_id):
+        pass
+    def add_homeworks(self, group_id):
+        pass
+    def remove_homeworks(self, group_id, homework_id):
+        pass
 
 class Admin(Teacher):
     pass
