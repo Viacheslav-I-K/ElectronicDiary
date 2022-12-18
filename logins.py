@@ -1,12 +1,15 @@
 import json
 
 from clients import Student, Teacher
+from functions import get_students_from_json, get_teachers_from_json
 
 def login(name, password):
-    with open("diary/students.json", "r", encoding="utf-8") as f:
-        students = json.load(f)
-    with open("diary/students.json", "r", encoding="utf-8") as f:
-        students = json.load(f)
-    return Student(id)
-    return Teacher(id)
-    return False
+    students = get_students_from_json()
+    for key, value in students.items():
+        if value["name"] == name and value["password"] == password:
+            return Student(key, {key: value})
+    
+    teachers = get_teachers_from_json()
+    for key, value in teachers.items():
+        if value["name"] == name and value["password"] == password:
+            return Teacher(key, {key: value})

@@ -1,7 +1,7 @@
 '''
 Создать информационную систему позволяющую работать с сотрудниками некой компании \ студентами вуза \ учениками школы.
 '''
-from functions import get_homeworks, get_teacher_by_id, table
+from functions import get_homeworks, get_teacher_by_id, table, get_homeworks_from_json, write_homeworks_to_json
 
 class Student:
     commannds = {
@@ -39,6 +39,19 @@ class Student:
         '''
         pass
 
+    def make_homework(self, homework_id):
+        temp_hw = get_homeworks_from_json()
+        if temp_hw.get(homework_id) is None:
+            print('Такой работы нет')
+        elif self.id not in temp_hw[homework_id]["students_completed"] and temp_hw[homework_id]["to_group"] == self.student[self.id]["group"] :
+            temp_hw[homework_id]["students_completed"].append(self.id)
+        else:
+            print('Ошибка при сдаче ДЗ')
+        
+        write_homeworks_to_json(temp_hw)
+
+
+    
     def print_commands(self):
         for key, command in self.commannds.items():
             print(f"{command} - {key}")
@@ -48,17 +61,23 @@ class Student:
             if command == "0":
                 self.view_homework()
             elif command == "1":
-                print("go;jhb")
+                self.make_homework(input("Введите id работы: "))
         else:
             print("Invalid command")
 
 class Teacher(Student):
     def view_homeworks(self, group_id):
-        pass
+        headers = {"id": "ID", "homework": "Домашняя Работа", "subject": "Предмет"}
+
     def add_homeworks(self, group_id):
         pass
-    def remove_homeworks(self, group_id, homework_id):
-        pass
+    def remove_homeworks(self, id_group, homework_id):
+        all_homeworks = get_homeworks_from_json()
+        for key, value in all_homeworks.items():
+            if value["to_group"] == id_group and key  == homework_id:
+                del all_homeworks[key]
+                break
+        write_homeworks_to_json(all_homeworks)
 
 class Admin(Teacher):
     pass

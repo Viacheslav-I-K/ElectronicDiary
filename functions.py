@@ -66,6 +66,8 @@ def table(headers, data):
     return res
 
 
+
+
 if __name__ == "__main__":
     print(get_teacher_by_id("0"))
     write_homeworks_to_json(get_homeworks_from_json())
