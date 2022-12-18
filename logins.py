@@ -1,6 +1,7 @@
 import json
 
-from clients import Student, Teacher
+from Students import Student
+from Teachers import Teacher
 from functions import get_students_from_json, get_teachers_from_json
 
 def login(name, password):
