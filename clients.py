@@ -75,8 +75,10 @@ class Teacher(Student):
         all_homeworks = get_homeworks_from_json()
         for key, value in all_homeworks.items():
             if value["to_group"] == id_group and key  == homework_id:
-                del all_homeworks[key]
-                break
+                if self.id == value["from"]:
+                    del all_homeworks[key]
+                    break
+                else: print("Вы не задавали эту домашнюю работу и поэтому не можете её удалить.")
         write_homeworks_to_json(all_homeworks)
 
 class Admin(Teacher):
