@@ -1,4 +1,6 @@
 import json
+import os
+os.chdir(os.path.dirname(__file__))
 
 
 def get_students_from_json():
