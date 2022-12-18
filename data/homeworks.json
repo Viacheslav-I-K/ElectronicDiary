@@ -23,5 +23,12 @@
         "homework": "сдать доклад",
         "deadline": "14.06.2022",
         "students_completed": []
+    },
+    "3": {
+        "from": "0",
+        "to_group": "0",
+        "homework": "выучить жи-ши",
+        "deadline": "вчера",
+        "students_completed": []
     }
 }

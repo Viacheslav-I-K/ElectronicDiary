@@ -66,11 +66,38 @@ class Student:
             print("Invalid command")
 
 class Teacher(Student):
+    commannds = {
+            0: "Посмотреть Д/З",
+            1: "Добавить Д/З",
+            2: "Удалить Д/З"
+        }
+
+    def do_command(self, command):
+        if command in [str(item) for item in self.commannds.keys()]:
+            if command == "0":
+                self.view_homework()
+            elif command == "1":
+                self.add_homeworks()
+            elif command == "2":
+                self.remove_homeworks()
+        else:
+            print("Invalid command")
+
     def view_homeworks(self, group_id):
         headers = {"id": "ID", "homework": "Домашняя Работа", "subject": "Предмет"}
 
-    def add_homeworks(self, group_id):
-        pass
+    def add_homeworks(self):
+        hw = get_homeworks_from_json()
+        hw[int(list(hw.keys())[-1]) + 1] = {
+            "from": self.id,
+            "to_group": input("Введите ключ группы, которой адресовано Д/З: "),
+            "homework": input("Текст Д/З: "),
+            "deadline": input("Дата сдачи Д/З: "),
+            "students_completed": []
+        }
+        write_homeworks_to_json(hw)
+        
+    
     def remove_homeworks(self, id_group, homework_id):
         all_homeworks = get_homeworks_from_json()
         for key, value in all_homeworks.items():

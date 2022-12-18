@@ -6,7 +6,7 @@ from functions import get_homeworks, get_teacher_by_id, table, get_homeworks_fro
 from logins import login
 
 
-name = "сергей"
+name = "Константин Юрьевич"
 password = "1234"
 user = login(name, password)
 
