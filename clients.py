@@ -1,7 +1,7 @@
 '''
 Создать информационную систему позволяющую работать с сотрудниками некой компании \ студентами вуза \ учениками школы.
 '''
-from functions import get_homeworks, get_teacher_by_id, table, get_homeworks_from_json, write_homeworks_to_json
+from functions import get_homeworks, get_teacher_by_id, table, get_homeworks_from_json, write_homeworks_to_json, get_students_from_json
 
 class Student:
     commannds = {
@@ -32,12 +32,6 @@ class Student:
                     "student_completed": "Сдано" if self.id in value["students_completed"] else "Не сдано"
                 })
         print(table(headers, temp))
-    
-    def make_homework(self, homework_id):
-        '''
-        self.id - id студента
-        '''
-        pass
 
     def make_homework(self, homework_id):
         temp_hw = get_homeworks_from_json()
@@ -66,8 +60,26 @@ class Student:
             print("Invalid command")
 
 class Teacher(Student):
-    def view_homeworks(self, group_id):
-        headers = {"id": "ID", "homework": "Домашняя Работа", "subject": "Предмет"}
+    def view_homeworks(self):
+        headers = {"id": "ID", "homework": "Домашняя Работа", "students": "Ученики сдавшие Д/З"}
+        group_id = input("Д/З какой группы выхотите посмотреть(напишие её id)?: ")
+        homeworks = get_homeworks(group_id)
+        temp = []
+        for item in homeworks:
+            temp_id = list(item.keys())[0]
+            students_res = ""
+            all_students = get_students_from_json()
+            i = 0
+            for it in item[temp_id]["students_completed"]:
+                student = all_students[it]["name"]
+                students_res += f", {student}" if i > 0 else f"{student}"
+                i += 1
+            temp.append({
+                "id": temp_id,
+                "homework": item[temp_id]["homework"],
+                "students": students_res
+            })
+        print(table(headers, temp))
 
     def add_homeworks(self, group_id):
         pass

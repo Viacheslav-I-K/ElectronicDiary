@@ -5,7 +5,10 @@
         "homework": "сдать реферат",
         "deadline": "14.06.2022",
         "students_completed": [
-            "0"
+            "0",
+            "1",
+            "2",
+            "3"
         ]
     },
     "1": {
@@ -22,6 +25,8 @@
         "to_group": "0",
         "homework": "сдать доклад",
         "deadline": "14.06.2022",
-        "students_completed": []
+        "students_completed": [
+            "0"
+        ]
     }
 }

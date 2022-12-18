@@ -6,17 +6,17 @@
     },
     "1": {
         "name": "Андрей",
-        "pasword": "1111",
+        "password": "1111",
         "group": "0"
     },
     "2": {
         "name": "Иван",
-        "pasword": "2222",
+        "password": "2222",
         "group": "1"
     },
     "3": {
         "name": "Юрий",
-        "pasword": "7777",
+        "password": "7777",
         "group": "0"
     }
 
