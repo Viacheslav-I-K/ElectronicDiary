@@ -5,12 +5,8 @@ from clients import Student
 from functions import get_homeworks, get_teacher_by_id, table, get_homeworks_from_json
 from logins import login
 
-# name = "сергей"
-# password = "1234"
-# name = "Константин Юрьевич"
-# password = "1234"
-name = "admin"
-password = "1234"
+name = input("Введите ваше имя: ")
+password = input("Введите ваш пароль: ")
 user = login(name, password)
 # user.change_teachers()
 # user.change_homeworkers()
