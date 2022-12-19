@@ -76,20 +76,6 @@ def table(headers, data):
         res += f"{'-' * lens[key]}+"
     return res
 
-
-
-
-if __name__ == "__main__":
-    print(get_teacher_by_id("0"))
-    write_homeworks_to_json(get_homeworks_from_json())
-
-'''
-def homeworks_from_json(action="read", data={}):
-    if action == "read":
-        with open("data/homeworks.json", "r", encoding="utf-8") as f:
-            homeworks = json.load(f)
-        return homeworks
-    elif action == "write":
-        with open("data/homeworks.json", "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=4, ensure_ascii=False)
-'''
+def write_students_to_json(students):
+    with open("data/students.json", "w", encoding="utf-8") as f:
+        json.dump(students, f, indent=4, ensure_ascii=False)
